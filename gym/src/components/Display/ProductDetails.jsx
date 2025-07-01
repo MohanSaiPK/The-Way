@@ -24,7 +24,7 @@ const ProductDetail = ({ endpoint }) => {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/${endpoint}/${id}/`)
+      .get(`https://gym-backend-nyw8.onrender.com/api/${endpoint}/${id}/`)
       .then((res) => {
         setProduct(res.data);
         setLoading(false);
@@ -41,7 +41,7 @@ const ProductDetail = ({ endpoint }) => {
     setWishlistLoading(true);
     try {
       await axios.post(
-        `http://127.0.0.1:8000/api/${endpoint}/${id}/toggle_wishlist/`,
+        `https://gym-backend-nyw8.onrender.com/api/${endpoint}/${id}/toggle_wishlist/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -59,7 +59,7 @@ const ProductDetail = ({ endpoint }) => {
     setCartLoading(true);
     try {
       await axios.post(
-        `http://127.0.0.1:8000/api/${endpoint}/${id}/toggle_cart/`,
+        `https://gym-backend-nyw8.onrender.com/api/${endpoint}/${id}/toggle_cart/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

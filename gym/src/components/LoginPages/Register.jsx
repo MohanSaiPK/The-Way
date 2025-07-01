@@ -11,7 +11,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://127.0.0.1:8000/api/register/", {
+      await axios.post("https://gym-backend-nyw8.onrender.com/api/register/", {
         username,
         password,
       });

@@ -30,7 +30,7 @@ const PaymentPage = () => {
       try {
         const token = localStorage.getItem("token");
         const res = await axios.get(
-          `http://127.0.0.1:8000/api/${category}/${id}/`,
+          `https://gym-backend-nyw8.onrender.com/api/${category}/${id}/`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

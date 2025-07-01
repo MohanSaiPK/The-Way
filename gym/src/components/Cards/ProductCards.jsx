@@ -30,7 +30,7 @@ export const ProductCards = ({ products, endpoint }) => {
     setIsLoadingWishlist(productId);
     try {
       await axios.post(
-        `http://127.0.0.1:8000/api/${endpoint}/${productId}/toggle_wishlist/`,
+        `https://gym-backend-nyw8.onrender.com/api/${endpoint}/${productId}/toggle_wishlist/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -53,7 +53,7 @@ export const ProductCards = ({ products, endpoint }) => {
     setIsLoadingCart(productId);
     try {
       await axios.post(
-        `http://127.0.0.1:8000/api/${endpoint}/${productId}/toggle_cart/`,
+        `https://gym-backend-nyw8.onrender.com/api/${endpoint}/${productId}/toggle_cart/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

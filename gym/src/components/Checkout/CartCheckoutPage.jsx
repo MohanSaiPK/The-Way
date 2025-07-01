@@ -22,7 +22,7 @@ const CartCheckoutPage = () => {
       setTimeout(async () => {
         try {
           await axios.post(
-            "http://127.0.0.1:8000/api/cart/clear/",
+            "https://gym-backend-nyw8.onrender.com/api/cart/clear/",
             {},
             {
               headers: {

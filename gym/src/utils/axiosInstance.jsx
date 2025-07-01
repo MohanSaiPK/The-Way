@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:8000/api",
+  baseURL: "https://gym-backend-nyw8.onrender.com/api",
 });
 
 axiosInstance.interceptors.request.use(
@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
       try {
         const refresh = localStorage.getItem("refresh_token");
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/token/refresh/",
+          "https://gym-backend-nyw8.onrender.com/api/token/refresh/",
           {
             refresh,
           }

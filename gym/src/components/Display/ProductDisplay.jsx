@@ -19,7 +19,7 @@ export const ProductDisplay = ({ endpoint }) => {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          `http://127.0.0.1:8000/api/${endpoint}/?search=${searchQuery}`
+          `https://gym-backend-nyw8.onrender.com/api/${endpoint}/?search=${searchQuery}`
         );
         setProducts(res.data);
       } catch (error) {

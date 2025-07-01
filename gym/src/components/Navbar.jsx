@@ -39,7 +39,7 @@ const Navbar = () => {
 
     try {
       await axios.post(
-        `http://127.0.0.1:8000/api/${endpoint}/${id}/${action}/`,
+        `https://gym-backend-nyw8.onrender.com/api/${endpoint}/${id}/${action}/`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },

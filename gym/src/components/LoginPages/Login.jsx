@@ -13,10 +13,13 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/token/", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://gym-backend-nyw8.onrender.com/api/token/",
+        {
+          username,
+          password,
+        }
+      );
 
       localStorage.setItem("token", response.data.access);
       localStorage.setItem("refresh_token", response.data.refresh);
