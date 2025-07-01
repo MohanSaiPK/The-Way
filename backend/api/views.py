@@ -10,7 +10,20 @@ from .serializers import ProductSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from django.http import HttpResponse
+from django.http import JsonResponse
 
+def create_superuser_view(request):
+    if request.method == "GET":
+        if not User.objects.filter(username="admin").exists():
+            User.objects.create_superuser(
+                username="admin",
+                password="adminpass123",
+                email="admin@example.com"
+            )
+            return JsonResponse({"message": "Superuser created ✅"})
+        else:
+            return JsonResponse({"message": "Superuser already exists ❗"})
+    return JsonResponse({"error": "Only GET allowed"}, status=405)
 
 
 @api_view(['POST'])
