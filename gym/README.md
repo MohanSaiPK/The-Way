@@ -35,6 +35,7 @@ Full-stack ecommerce web app for gym supplements and fitness products.
 
 ## 🚀 Run Locally
 
+
 ### Backend
 ```bash
 cd backend
