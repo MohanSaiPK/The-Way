@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useUserItems } from "../../context/UserItemsContext";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
 
 const Login = () => {
   const { wishlist, cart, refresh } = useUserItems();
@@ -13,7 +14,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         "https://gym-backend-nyw8.onrender.com/api/token/",
         {
           username,
