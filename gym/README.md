@@ -27,6 +27,11 @@ Full-stack ecommerce web app for gym supplements and fitness products.
 ![screencapture-localhost-5173-cart-checkout-2025-07-01-16_25_30](https://github.com/user-attachments/assets/cfe6de77-96f6-4da2-ba22-f701a7717bda)
 ![Screenshot (183)](https://github.com/user-attachments/assets/e2c11507-04e4-4861-8c60-f52678778497)
 
+**Django Admin**
+
+![Screenshot 2025-07-01 162850](https://github.com/user-attachments/assets/91e0243f-bb91-4636-a5c0-7e24939a1d2f)
+![Screenshot 2025-07-01 162906](https://github.com/user-attachments/assets/9bf01b76-bd6b-4e5f-b606-789e49727680)
+![screencapture-127-0-0-1-8000-admin-api-product-add-2025-07-01-16_30_04](https://github.com/user-attachments/assets/ae1d61a1-a110-4d14-9aa6-cef16af11ecc)
 
 ## 🚀 Run Locally
 
@@ -35,10 +40,6 @@ Full-stack ecommerce web app for gym supplements and fitness products.
 cd backend
 python manage.py runserver
 
-Django Admin
-![Screenshot 2025-07-01 162850](https://github.com/user-attachments/assets/91e0243f-bb91-4636-a5c0-7e24939a1d2f)
-![Screenshot 2025-07-01 162906](https://github.com/user-attachments/assets/9bf01b76-bd6b-4e5f-b606-789e49727680)
-![screencapture-127-0-0-1-8000-admin-api-product-add-2025-07-01-16_30_04](https://github.com/user-attachments/assets/ae1d61a1-a110-4d14-9aa6-cef16af11ecc)
 
 
 
