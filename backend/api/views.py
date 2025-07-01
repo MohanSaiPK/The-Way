@@ -9,10 +9,21 @@ from .models import Product
 from .serializers import ProductSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
-from django.http import JsonResponse
+
+from django.http import HttpResponse
 
 
-
+def ensure_admin_user(request):
+    try:
+        user, created = User.objects.get_or_create(username='admin')
+        user.set_password('adminpass123')  # Reset password every time this runs
+        user.is_superuser = True
+        user.is_staff = True
+        user.email = 'admin@example.com'
+        user.save()
+        return HttpResponse("✅ Admin user ensured and password reset.")
+    except Exception as e:
+        return HttpResponse(f"❌ Error: {str(e)}")
 
 @api_view(['POST'])
 

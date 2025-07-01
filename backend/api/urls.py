@@ -3,7 +3,7 @@ from django.urls import path
 from .views import ClearCartView
 from .views import register_user
 from .views import ProductViewSet, SupplementViewSet, UserWishlistView, UserCartView
-
+from .views import ensure_admin_user
 
 router = DefaultRouter()
 router.register(r'products', ProductViewSet, basename='products')
@@ -14,5 +14,6 @@ urlpatterns = router.urls + [
     path('user/cart/', UserCartView.as_view(), name='user-cart'),
     path('register/', register_user, name='register'),
     path('cart/clear/', ClearCartView.as_view(), name='clear-cart'),
+    path('ensure-admin/', ensure_admin_user),
     
 ]
