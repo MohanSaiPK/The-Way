@@ -134,13 +134,3 @@ class ClearCartView(APIView):
         return Response({"message": "Cart cleared successfully"})
     
 
-@require_GET  # ✅ Allow only GET requests
-def create_superuser_view(request):
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser(
-            username='admin',
-            email='admin@example.com',
-            password='adminpass123'
-        )
-        return JsonResponse({'status': '✅ Superuser created'})
-    return JsonResponse({'status': '⚠️ Superuser already exists'})

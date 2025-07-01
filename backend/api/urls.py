@@ -14,5 +14,5 @@ urlpatterns = router.urls + [
     path('user/cart/', UserCartView.as_view(), name='user-cart'),
     path('register/', register_user, name='register'),
     path('cart/clear/', ClearCartView.as_view(), name='clear-cart'),
-    path('create-superuser/',create_superuser_view),
+    
 ]
