@@ -10,15 +10,11 @@ from .serializers import ProductSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from django.http import JsonResponse
+from django.views.decorators.http import require_GET
 
 
 
 @api_view(['POST'])
-def create_superuser_view(request):
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser('admin', 'admin@example.com', 'adminpass123')
-        return JsonResponse({'status': 'Superuser created'})
-    return JsonResponse({'status': 'Superuser already exists'})
 
 def register_user(request):
     username = request.data.get('username')
@@ -136,3 +132,15 @@ class ClearCartView(APIView):
         user.cart.clear()       # for products
        
         return Response({"message": "Cart cleared successfully"})
+    
+
+@require_GET  # ✅ Allow only GET requests
+def create_superuser_view(request):
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser(
+            username='admin',
+            email='admin@example.com',
+            password='adminpass123'
+        )
+        return JsonResponse({'status': '✅ Superuser created'})
+    return JsonResponse({'status': '⚠️ Superuser already exists'})
