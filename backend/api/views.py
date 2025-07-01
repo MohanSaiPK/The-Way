@@ -10,7 +10,7 @@ from .serializers import ProductSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from django.http import JsonResponse
-from django.views.decorators.http import require_GET
+
 
 
 

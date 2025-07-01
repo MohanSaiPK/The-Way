@@ -3,7 +3,7 @@ from django.urls import path
 from .views import ClearCartView
 from .views import register_user
 from .views import ProductViewSet, SupplementViewSet, UserWishlistView, UserCartView
-from .views import create_superuser_view
+
 
 router = DefaultRouter()
 router.register(r'products', ProductViewSet, basename='products')
