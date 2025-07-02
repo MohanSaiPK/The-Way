@@ -167,7 +167,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    "https://the-healthy-way.netlify.app",  
+    "https://the-healthy-way.netlify.app",
+    "http://localhost:5173",
+      
 ]
 
 REST_FRAMEWORK = {
