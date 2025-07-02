@@ -20,7 +20,7 @@ export const ProductDisplay = ({ endpoint }) => {
     const fetchProducts = async () => {
       try {
         const res = await axiosInstance.get(
-          `api/${endpoint}/?search=${searchQuery}`
+          `${endpoint}/?search=${searchQuery}`
         );
         setProducts(res.data);
       } catch (error) {

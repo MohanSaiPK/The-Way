@@ -25,7 +25,7 @@ const ProductDetail = ({ endpoint }) => {
 
   useEffect(() => {
     axiosInstance
-      .get(`api/${endpoint}/${id}/`)
+      .get(`${endpoint}/${id}/`)
       .then((res) => {
         setProduct(res.data);
         setLoading(false);

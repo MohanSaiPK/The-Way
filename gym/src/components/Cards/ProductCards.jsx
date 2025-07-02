@@ -19,7 +19,7 @@ export const ProductCards = ({ products, endpoint }) => {
   const [isLoadingCart, setIsLoadingCart] = useState(null);
   const token = localStorage.getItem("token");
   const handleProductClick = (productId) => {
-    navigate(`/${endpoint}/${productId}`);
+    navigate(`${productId}`);
   };
 
   const handleWishlistToggle = async (productId) => {
@@ -54,7 +54,7 @@ export const ProductCards = ({ products, endpoint }) => {
     setIsLoadingCart(productId);
     try {
       await axiosInstance.post(
-        `{endpoint}/${productId}/toggle_cart/`,
+        `${endpoint}/${productId}/toggle_cart/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
