@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import dj_database_url
+import os
 from pathlib import Path
 import os
 
@@ -88,9 +89,8 @@ WSGI_APPLICATION = 'gym_backend.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        dj_database_url.config(default='postgresql://theway_db_user:sDMiu1kujCIkiH88rZYLtx0z1Hej7W6A@dpg-d1ib38adbo4c73er9mrg-a.singapore-postgres.render.com/theway_db')
-    }
+    'default':dj_database_url.config(default=os.environ.get('postgresql://theway_db_user:sDMiu1kujCIkiH88rZYLtx0z1Hej7W6A@dpg-d1ib38adbo4c73er9mrg-a.singapore-postgres.render.com/theway_db'))
+    
 }
 
 
