@@ -4,6 +4,7 @@ import { useUserItems } from "../../context/UserItemsContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 
 const CartCheckoutPage = () => {
   const navigate = useNavigate();
@@ -21,8 +22,8 @@ const CartCheckoutPage = () => {
       setIsProcessing(false);
       setTimeout(async () => {
         try {
-          await axios.post(
-            "https://gym-backend-nyw8.onrender.com/api/cart/clear/",
+          await axiosInstance.post(
+            "cart/clear/",
             {},
             {
               headers: {

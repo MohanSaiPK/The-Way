@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
 
 const PaymentPage = () => {
   const { id, category } = useParams(); // now you're using both
@@ -29,14 +30,11 @@ const PaymentPage = () => {
     const fetchProduct = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(
-          `https://gym-backend-nyw8.onrender.com/api/${category}/${id}/`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await axiosInstance.get(`${category}/${id}/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setProduct(res.data);
       } catch (err) {
         console.error("Failed to fetch product", err);

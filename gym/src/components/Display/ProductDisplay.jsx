@@ -4,6 +4,7 @@ import { ProductCards } from "../Cards/ProductCards";
 import axios from "axios";
 import { useUserItems } from "../../context/UserItemsContext";
 import { useNavigate, useLocation } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
 
 export const ProductDisplay = ({ endpoint }) => {
   const navigate = useNavigate();
@@ -18,8 +19,8 @@ export const ProductDisplay = ({ endpoint }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(
-          `https://gym-backend-nyw8.onrender.com/api/${endpoint}/?search=${searchQuery}`
+        const res = await axiosInstance.get(
+          `api/${endpoint}/?search=${searchQuery}`
         );
         setProducts(res.data);
       } catch (error) {

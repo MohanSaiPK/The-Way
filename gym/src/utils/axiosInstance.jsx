@@ -1,9 +1,17 @@
 // src/utils/axiosInstance.js
 import axios from "axios";
 
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
+
+const backendURL = isLocal
+  ? "http://127.0.0.1:8000/api/"
+  : "https://gym-backend-nyw8.onrender.com/api/";
+
 const axiosInstance = axios.create({
-  baseURL: "https://gym-backend-nyw8.onrender.com/api",
-  headers: { "Content-Type": "application-json" },
+  baseURL: backendURL,
+  headers: { "Content-Type": "application/json" },
 });
 
 axiosInstance.interceptors.request.use(
@@ -31,12 +39,9 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const refresh = localStorage.getItem("refresh_token");
-        const response = await axios.post(
-          "https://gym-backend-nyw8.onrender.com/api/token/refresh/",
-          {
-            refresh,
-          }
-        );
+        const response = await axiosInstance.post("token/refresh/", {
+          refresh,
+        });
 
         const newAccessToken = response.data.access;
         localStorage.setItem("token", newAccessToken);

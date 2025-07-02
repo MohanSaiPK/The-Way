@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -11,7 +12,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post("https://gym-backend-nyw8.onrender.com/api/register/", {
+      await axiosInstance.post("register/", {
         username,
         password,
       });

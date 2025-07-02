@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axiosInstance from "../utils/axiosInstance";
 
 const Navbar = () => {
   const { wishlist, cart, refresh } = useUserItems();
@@ -38,8 +39,8 @@ const Navbar = () => {
     const action = type === "wishlist" ? "toggle_wishlist" : "toggle_cart";
 
     try {
-      await axios.post(
-        `https://gym-backend-nyw8.onrender.com/api/${endpoint}/${id}/${action}/`,
+      await axiosInstance.post(
+        `${endpoint}/${id}/${action}/`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },

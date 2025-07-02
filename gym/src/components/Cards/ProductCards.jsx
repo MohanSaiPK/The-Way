@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useUserItems } from "../../context/UserItemsContext.jsx";
+import axiosInstance from "../../utils/axiosInstance.jsx";
 
 export const ProductCards = ({ products, endpoint }) => {
   const { wishlist, cart, refresh } = useUserItems();
@@ -18,7 +19,7 @@ export const ProductCards = ({ products, endpoint }) => {
   const [isLoadingCart, setIsLoadingCart] = useState(null);
   const token = localStorage.getItem("token");
   const handleProductClick = (productId) => {
-    navigate(`/${endpoint}/${productId}`); // ✅ e.g., /products/5 or /supplements/12
+    navigate(`/${endpoint}/${productId}`);
   };
 
   const handleWishlistToggle = async (productId) => {
@@ -35,7 +36,7 @@ export const ProductCards = ({ products, endpoint }) => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      await refresh(); // ✅ Right here after successful API call
+      await refresh();
     } catch (error) {
       console.error("Wishlist error:", error);
       alert("Something went wrong.");
@@ -52,8 +53,8 @@ export const ProductCards = ({ products, endpoint }) => {
 
     setIsLoadingCart(productId);
     try {
-      await axios.post(
-        `https://gym-backend-nyw8.onrender.com/api/${endpoint}/${productId}/toggle_cart/`,
+      await axiosInstance.post(
+        `{endpoint}/${productId}/toggle_cart/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -72,8 +73,8 @@ export const ProductCards = ({ products, endpoint }) => {
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
+    /* autoplay: true,
+    autoplaySpeed: 3000, */
     pauseOnHover: true,
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 2 } },

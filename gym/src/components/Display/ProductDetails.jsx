@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import { useUserItems } from "../../context/UserItemsContext";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
 
 const ProductDetail = ({ endpoint }) => {
   const { id } = useParams(); // from route /products/:id or /supplements/:id
@@ -23,8 +24,8 @@ const ProductDetail = ({ endpoint }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`https://gym-backend-nyw8.onrender.com/api/${endpoint}/${id}/`)
+    axiosInstance
+      .get(`api/${endpoint}/${id}/`)
       .then((res) => {
         setProduct(res.data);
         setLoading(false);
@@ -40,8 +41,8 @@ const ProductDetail = ({ endpoint }) => {
 
     setWishlistLoading(true);
     try {
-      await axios.post(
-        `https://gym-backend-nyw8.onrender.com/api/${endpoint}/${id}/toggle_wishlist/`,
+      await axiosInstance.post(
+        `${endpoint}/${id}/toggle_wishlist/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -58,8 +59,8 @@ const ProductDetail = ({ endpoint }) => {
 
     setCartLoading(true);
     try {
-      await axios.post(
-        `https://gym-backend-nyw8.onrender.com/api/${endpoint}/${id}/toggle_cart/`,
+      await axiosInstance.post(
+        `${endpoint}/${id}/toggle_cart/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -89,11 +90,7 @@ const ProductDetail = ({ endpoint }) => {
         <div className="flex flex-col gap-4 md:w-1/2">
           <h1 className="text-3xl font-bold">{product.name}</h1>
           <p className="text-lg text-gray-300">₹{product.price}</p>
-          <p className="text-md text-gray-400">
-            {/* Customize this if you add description */}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            non semper nulla.
-          </p>
+          <p className="text-md text-gray-400">{product.description}</p>
 
           <div className="flex gap-4 items-center">
             <button

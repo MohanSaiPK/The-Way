@@ -7,6 +7,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'category','tags')
     list_filter = ('category',)
     search_fields = ('name', 'tags')
+    fields=('name','image', 'price', 'category','tags','description')
     
     def wishlist_users_count(self, obj):
         return obj.wishlist_users.count()

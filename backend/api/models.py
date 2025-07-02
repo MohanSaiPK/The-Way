@@ -9,12 +9,13 @@ class Product(models.Model):
 
     name = models.CharField(max_length=255)
     image = models.ImageField(upload_to='products/')
+    description = models.TextField(blank=True,null=True)
     wishlist = models.BooleanField(default=False)
     wishlist_users = models.ManyToManyField(User, related_name='wishlist', blank=True)
     cart_users = models.ManyToManyField(User, related_name='cart', blank=True)
     price = models.CharField(max_length=20)
     tags = models.TextField(default=list)
-    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='product')  # ✅ New
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='product')  
 
     def __str__(self):
         return self.name
