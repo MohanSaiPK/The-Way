@@ -30,8 +30,8 @@ export const ProductCards = ({ products, endpoint }) => {
 
     setIsLoadingWishlist(productId);
     try {
-      await axios.post(
-        `https://gym-backend-nyw8.onrender.com/api/${endpoint}/${productId}/toggle_wishlist/`,
+      await axiosInstance.post(
+        `${endpoint}/${productId}/toggle_wishlist/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
