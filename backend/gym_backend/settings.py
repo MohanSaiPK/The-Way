@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import dj_database_url
 import os
 from pathlib import Path
-import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -49,6 +51,8 @@ INSTALLED_APPS = [
     'api',
     'corsheaders',
     'django_extensions',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -85,13 +89,37 @@ TEMPLATES = [
 WSGI_APPLICATION = 'gym_backend.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default':dj_database_url.config(default=os.environ.get('postgresql://theway_db_user:sDMiu1kujCIkiH88rZYLtx0z1Hej7W6A@dpg-d1ib38adbo4c73er9mrg-a.singapore-postgres.render.com/theway_db'))
-    
+DATABASE_URL=os.environ.get("DATABASE_URL")
+
+
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.config(default=DATABASE_URL)
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-default-fallback')
+
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
+
+
+DEFAULT_FILE_STORAGE='cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Password validation
