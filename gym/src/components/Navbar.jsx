@@ -9,6 +9,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const { wishlist, cart, refresh } = useUserItems();
@@ -17,6 +18,9 @@ const Navbar = () => {
 
   const [showWishlist, setShowWishlist] = useState(false);
   const [showCartList, setCartList] = useState(false);
+
+  const location = useLocation();
+  const isAuthPage = ["/login", "/register"].includes(location.pathname);
 
   const handleProductClick = (productId, category) => {
     const endpoint = category === "supplement" ? "supplements" : "products";
@@ -58,7 +62,7 @@ const Navbar = () => {
     <nav className="bg-gray-900 text-white p-4 flex justify-between items-center relative z-50">
       <div className="text-2xl font-bold">GYM STORE</div>
 
-      {token && (
+      {isAuthPage && token && (
         <div className="flex items-center space-x-6">
           {/* Wishlist */}
           <div className="relative">
