@@ -89,8 +89,7 @@ WSGI_APPLICATION = 'gym_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        dj_database_url.config(default='postgresql://theway_db_user:sDMiu1kujCIkiH88rZYLtx0z1Hej7W6A@dpg-d1ib38adbo4c73er9mrg-a.singapore-postgres.render.com/theway_db')
     }
 }
 
