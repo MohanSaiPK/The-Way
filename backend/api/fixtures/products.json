@@ -1,0 +1,57 @@
+[
+  {
+    "model": "api.product",
+    "pk": 1,
+    "fields": {
+      "name": "Whey Protein",
+      "price": "2299.00",
+      "category": "product",
+      "tags": "whey, protein, muscle",
+      "description": "High-quality whey protein for muscle recovery and growth."
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 2,
+    "fields": {
+      "name": "Creatine Monohydrate",
+      "price": "799.00",
+      "category": "product",
+      "tags": "creatine, strength, monohydrate",
+      "description": "Boosts strength and performance with 100% pure creatine."
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 3,
+    "fields": {
+      "name": "BCAA Powder",
+      "price": "1299.00",
+      "category": "product",
+      "tags": "bcaa, recovery, amino acids",
+      "description": "Essential amino acids for faster recovery and endurance."
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 4,
+    "fields": {
+      "name": "EAA Formula",
+      "price": "1199.00",
+      "category": "product",
+      "tags": "eaa, amino, essential",
+      "description": "Complete EAA profile for muscle growth and hydration."
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 5,
+    "fields": {
+      "name": "Testosterone Booster",
+      "price": "1699.00",
+      "category": "product",
+      "tags": "testosterone, booster, strength",
+      "description": "Natural ingredients to support healthy testosterone levels."
+    }
+  }
+]

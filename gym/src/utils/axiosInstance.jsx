@@ -1,5 +1,6 @@
 // src/utils/axiosInstance.js
 import axios from "axios";
+import { navigateTo } from "./navigateHelper";
 
 const isLocal =
   window.location.hostname === "localhost" ||
@@ -39,23 +40,29 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const refresh = localStorage.getItem("refresh_token");
-        const response = await axiosInstance.post("token/refresh/", {
-          refresh,
-        });
+        if (!refresh) throw new Error("No refresh Token");
+
+        const response = await axios.post(
+          `${backendURL}token/refresh/`,
+          { refresh },
+          { headers: { "Content-Type": "application/json" } }
+        );
 
         const newAccessToken = response.data.access;
         localStorage.setItem("token", newAccessToken);
 
-        // Update the Authorization header and retry
         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         console.error("Refresh token failed", refreshError);
         localStorage.removeItem("token");
         localStorage.removeItem("refresh_token");
-        window.location.href = "/"; // Redirect to login
+
+        // ✅ Use helper function to redirect safely
+        navigateTo("/");
       }
     }
+
     return Promise.reject(error);
   }
 );

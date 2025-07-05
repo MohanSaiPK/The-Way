@@ -13,8 +13,17 @@ import { UserItemsProvider } from "./context/UserItemsContext.jsx";
 import ProductDetail from "./components/Display/ProductDetails.jsx";
 import PaymentPage from "./components/Payment/PaymentPage";
 import CartCheckoutPage from "./components/Checkout/CartCheckoutPage.jsx";
+import { useEffect } from "react";
+import { setNavigator } from "./utils/navigateHelper";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setNavigator(navigate);
+  }, [navigate]);
+
   return (
     <UserItemsProvider>
       <Navbar />

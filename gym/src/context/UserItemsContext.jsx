@@ -1,30 +1,55 @@
 // context/UserItemsContext.jsx
-import React, { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
+import { jwtDecode } from "jwt-decode";
 
 const UserItemsContext = createContext();
 
-export const useUserItems = () => useContext(UserItemsContext);
+function useUserItems() {
+  return useContext(UserItemsContext);
+}
 
-export const UserItemsProvider = ({ children }) => {
+const UserItemsProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const location = useLocation();
-
-  const refresh = async () => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      setWishlist([]);
-      setCart([]);
-      setIsLoaded(true);
-      return;
+  const isAccessTokenValid = () => {
+    const access = localStorage.getItem("token");
+    if (!access) return false;
+    if (access) {
+      try {
+        const decoded = jwtDecode(access);
+        return decoded.exp > Date.now() / 1000;
+      } catch (err) {
+        return false;
+      }
     }
+  };
 
+  const refreshAccessToken = async () => {
+    const refresh = localStorage.getItem("refresh_token");
+
+    if (!refresh) return false;
+
+    try {
+      const response = await axiosInstance.post("token/refresh/", { refresh });
+
+      localStorage.setItem("token", response.data.access);
+      console.log("✅ Token refreshed");
+      return true;
+    } catch (err) {
+      console.error("🔴 Refresh failed", err);
+      localStorage.removeItem("token");
+      localStorage.removeItem("refresh_token");
+      navigate("/");
+      return false; // Or use navigate("/login")
+    }
+  };
+
+  const refreshUserItems = async () => {
     try {
       const [wishlistRes, cartRes] = await Promise.all([
         axiosInstance.get("/user/wishlist/"),
@@ -33,21 +58,41 @@ export const UserItemsProvider = ({ children }) => {
       setWishlist(wishlistRes.data);
       setCart(cartRes.data);
     } catch (err) {
-      console.error("Refresh failed", err);
+      console.error("❌ Error fetching user items", err);
     } finally {
-      setIsLoaded(true); // ✅ mark as loaded whether success/fail
+      setIsLoaded(true);
     }
   };
 
   useEffect(() => {
-    refresh();
-  }, [location.pathname]);
+    const validateAndLoad = async () => {
+      const valid = isAccessTokenValid();
+      if (!valid) {
+        const refreshed = await refreshAccessToken();
+        if (!refreshed) {
+          setIsLoaded(true);
+          return;
+        }
+      }
+      await refreshUserItems();
+    };
+    validateAndLoad();
+  }, []);
 
   return (
     <UserItemsContext.Provider
-      value={{ wishlist, cart, setWishlist, setCart, refresh, isLoaded }}
+      value={{
+        wishlist,
+        cart,
+        setWishlist,
+        setCart,
+        refresh: refreshUserItems,
+        isLoaded,
+      }}
     >
       {children}
     </UserItemsContext.Provider>
   );
 };
+
+export { UserItemsContext, useUserItems, UserItemsProvider };

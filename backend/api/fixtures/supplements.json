@@ -1,0 +1,57 @@
+[
+  {
+    "model": "api.product",
+    "pk": 6,
+    "fields": {
+      "name": "Multivitamin Capsules",
+      "price": "499.00",
+      "category": "supplement",
+      "tags": "multivitamin, vitamins, health",
+      "description": "Complete daily multivitamins to support overall health."
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 7,
+    "fields": {
+      "name": "Omega-3 Fish Oil",
+      "price": "699.00",
+      "category": "supplement",
+      "tags": "omega, fish oil, heart",
+      "description": "Supports heart health and joint function with Omega-3."
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 8,
+    "fields": {
+      "name": "Home Dumbbell Set",
+      "price": "2399.00",
+      "category": "supplement",
+      "tags": "dumbbells, home gym, equipment",
+      "description": "Adjustable dumbbell set perfect for home workouts."
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 9,
+    "fields": {
+      "name": "Resistance Bands",
+      "price": "799.00",
+      "category": "supplement",
+      "tags": "resistance bands, home workout, equipment",
+      "description": "Durable resistance bands for stretching and strength training."
+    }
+  },
+  {
+    "model": "api.product",
+    "pk": 10,
+    "fields": {
+      "name": "Zinc + Magnesium Capsules",
+      "price": "599.00",
+      "category": "supplement",
+      "tags": "zinc, magnesium, recovery",
+      "description": "Supports muscle recovery and improves sleep quality."
+    }
+  }
+]

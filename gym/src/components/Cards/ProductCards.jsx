@@ -70,7 +70,7 @@ export const ProductCards = ({ products, endpoint }) => {
 
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: products.length > 3,
     slidesToShow: 3,
     slidesToScroll: 1,
     /* autoplay: true,
@@ -89,10 +89,10 @@ export const ProductCards = ({ products, endpoint }) => {
       ) : (
         <Slider {...settings} className="p-4">
           {products.map((item) => (
-            <div key={item.id} className="flex flex-col items-center pt-16">
+            <div key={item.id} className="flex  items-center pt-16">
               <img
                 src={item.image}
-                className="w-10/12 h-64 hover:scale-105 duration-300"
+                className="w-full flex justify-center items-center h-64 object-contain hover:scale-105 duration-300"
                 alt={item.name}
                 onClick={() => handleProductClick(item.id)}
               />
