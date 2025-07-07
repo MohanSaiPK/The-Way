@@ -79,7 +79,7 @@ const ProductDetail = ({ endpoint }) => {
   const isInCart = cart.some((item) => item.id === product.id);
 
   return (
-    <div className="w-full min-h-screen bg-blackRedBG bg-cover bg-center text-white p-10">
+    <div className="w-full min-h-screen bg-blackRedBG bg-cover bg-center text-white pt-20 px-10">
       <div className="flex flex-col md:flex-row gap-8">
         <img
           src={product.image}
