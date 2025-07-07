@@ -20,7 +20,6 @@ const PaymentPage = () => {
       setIsProcessing(false);
       setTimeout(() => {
         setShowModal(false);
-        alert("✅ Payment Successful!");
         navigate("/homes"); // Or /success page
       }, 1000);
     }, 2000); // fake payment delay
@@ -49,18 +48,25 @@ const PaymentPage = () => {
   const total = parseFloat(product.price) + delivery;
 
   return (
-    <div className="min-h-screen bg-blackRedBG bg-cover text-white p-10">
+    <div className="min-h-screen w-full bg-blackRedBG bg-cover text-white px-10 pt-20 md:p-10 overflow-x-hidden">
       <h1 className="text-3xl font-bold mb-4">Checkout</h1>
-      <div className="flex gap-10">
-        <img src={product.image} className="w-64 h-64 object-cover rounded" />
+      <div className="flex flex-col lg:flex-row gap-10 max-w-full overflow-x-hidden">
+        <img
+          src={product.image}
+          className="w-64 h-64 object-contain rounded self-center"
+        />
         <div>
-          <h2 className="text-2xl">{product.name}</h2>
-          <p className="text-lg text-gray-300 mb-4">Price: ₹{product.price}</p>
-          <p className="text-lg text-gray-300 mb-4">
+          <h2 className="text-base md:text-2xl">{product.name}</h2>
+          <p className=" text-base md:text-lg text-gray-300 mb-4">
+            Price: ₹{product.price}
+          </p>
+          <p className="text-base md:text-lg text-gray-300 mb-4">
             Delivery Charges: ₹{delivery}
           </p>
 
-          <h1 className="text-3xl font-bold mb-4">Total: ₹{total}</h1>
+          <h1 className="text-lg md:text-3xl font-bold mb-4">
+            Total: ₹{total}
+          </h1>
 
           <button
             className="bg-green-600 px-4 py-2 rounded text-white"
@@ -73,8 +79,10 @@ const PaymentPage = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
-            <h2 className="text-xl font-semibold mb-4">Processing Payment</h2>
-            <p className="mb-4">Pay ₹{total.toFixed(2)}</p>
+            <h2 className="text-xl text-blue-700 font-semibold mb-4">
+              Processing Payment
+            </h2>
+            <p className="mb-4">Paying ₹{total.toFixed(2)}</p>
             {isProcessing ? (
               <div className="flex justify-center">
                 <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />

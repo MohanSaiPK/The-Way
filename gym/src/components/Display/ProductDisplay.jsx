@@ -12,13 +12,15 @@ export const ProductDisplay = ({ endpoint }) => {
   const isProductPage = location.pathname === "/products";
 
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+
   const { isLoaded } = useUserItems();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setIsLoading(true);
         const res = await axiosInstance.get(
           `${endpoint}/?search=${searchQuery}`
         );
@@ -26,6 +28,8 @@ export const ProductDisplay = ({ endpoint }) => {
       } catch (error) {
         console.error("Error fetching filtered products:", error);
         setProducts([]); // fallback to empty
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -35,12 +39,12 @@ export const ProductDisplay = ({ endpoint }) => {
   if (!isLoaded) return <div className="text-white p-6">Loading...</div>;
 
   return (
-    <div className="w-full h-full bg-cover bg-blackRedBG p-10">
+    <div className="w-full min-h-screen bg-cover bg-blackRedBG px-10 pt-20">
       {/* 🔍 Search and Filter */}
-      <div className="flex justify-between items-center mb-6">
-        <div className="space-x-4">
+      <div className="flex justify-between items-start my-6">
+        <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-4">
           <button
-            className={`px-4 py-2 rounded ${
+            className={`md:px-4 md:py-2 px-2 py-1 rounded ${
               isProductPage ? "bg-red-600 text-white" : "bg-white text-black"
             }`}
             onClick={() => navigate("/products")}
@@ -48,7 +52,7 @@ export const ProductDisplay = ({ endpoint }) => {
             Products
           </button>
           <button
-            className={`px-4 py-2 rounded ${
+            className={`md:px-4 md:py-2 px-2 py-1 rounded ${
               !isProductPage ? "bg-red-600 text-white" : "bg-white text-black"
             }`}
             onClick={() => navigate("/supplements")}
@@ -62,13 +66,17 @@ export const ProductDisplay = ({ endpoint }) => {
           placeholder="Search products..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="px-4 py-2 rounded w-1/3 text-black"
+          className="px-1 py-1 md:p-2 rounded w-1/2 md:w-1/3 text-black"
         />
       </div>
 
       {/* 💳 Product Cards */}
       <div className="justify-center z-0">
-        <ProductCards products={products} endpoint={endpoint} />
+        <ProductCards
+          products={products}
+          endpoint={endpoint}
+          isLoading={isLoading}
+        />
       </div>
     </div>
   );

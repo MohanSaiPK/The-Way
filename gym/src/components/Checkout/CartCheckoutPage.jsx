@@ -34,7 +34,6 @@ const CartCheckoutPage = () => {
           await refresh();
           setCart([]);
           setShowModal(false);
-          alert("✅ Payment Successful!");
           navigate("/homes");
         } catch (err) {
           console.error("Error clearing cart:", err);
@@ -47,7 +46,7 @@ const CartCheckoutPage = () => {
   const total = cart.reduce((sum, item) => sum + parseFloat(item.price), 0);
 
   return (
-    <div className="min-h-screen bg-blackRedBG bg-cover text-white p-10">
+    <div className="min-h-screen bg-blackRedBG bg-cover text-white px-10 pt-20">
       <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
@@ -74,9 +73,11 @@ const CartCheckoutPage = () => {
             ))}
           </div>
           <div className="mt-8 flex justify-between items-center">
-            <h2 className="text-2xl font-bold">Total: ₹{total.toFixed(2)}</h2>
+            <h2 className="md:text-2xl font-bold">
+              Total: ₹{total.toFixed(2)}
+            </h2>
             <button
-              className="bg-green-600 hover:bg-green-700 px-6 py-2 rounded text-white"
+              className="bg-green-600 hover:bg-green-700 px-3 md:px-6 py-1 md:py-2 rounded text-white md:text-lg"
               onClick={handleMockPayment}
             >
               Proceed to Pay

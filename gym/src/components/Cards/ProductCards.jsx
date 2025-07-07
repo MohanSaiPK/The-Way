@@ -12,7 +12,7 @@ import axios from "axios";
 import { useUserItems } from "../../context/UserItemsContext.jsx";
 import axiosInstance from "../../utils/axiosInstance.jsx";
 
-export const ProductCards = ({ products, endpoint }) => {
+export const ProductCards = ({ products, endpoint, isLoading }) => {
   const { wishlist, cart, refresh } = useUserItems();
   const navigate = useNavigate();
   const [isLoadingWishlist, setIsLoadingWishlist] = useState(null);
@@ -84,7 +84,11 @@ export const ProductCards = ({ products, endpoint }) => {
 
   return (
     <div className="border-2 rounded-3xl w-full">
-      {products.length === 0 ? (
+      {isLoading ? (
+        <div className="text-white text-center animate-pulse text-lg">
+          Loading...
+        </div>
+      ) : products.length === 0 ? (
         <div className="text-white text-center py-10">No results found.</div>
       ) : (
         <Slider {...settings} className="p-4">

@@ -9,8 +9,8 @@ export const Home = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen max-w-full flex flex-col md:justify-center items-center md:pb-16 ">
-      <div className="flex justify-center py-20">
+    <div className="bg-black min-h-screen  flex flex-col md:justify-center items-center md:pb-16 ">
+      <div className="flex justify-center pt-20 pb-10 md:py-20  ">
         <div className="flex flex-col space-y-12 md:space-y-44 py-6">
           <h1 className="text-3xl md:text-8xl font-extrabold text-white whitespace-nowrap  absolute  md:start-20">
             THE ONLY WAY
@@ -41,9 +41,8 @@ export const Home = () => {
         </div>
       </div>
 
-      {/* Dropdown Wrapper */}
       <div className="relative font-bold">
-        <div className="flex space-x-4 md:w-24 md:h-12 md:text-lg mt-6 md:mt-0 md:justify-start justify-end w-full pl-32 md:pl-0">
+        <div className="md:flex-row flex flex-col space-y-4 md:space-y-0 md:space-x-4 md:w-24 md:h-12 md:text-lg mt-6 md:justify-start justify-end w-full pl-32 md:pl-0">
           <button
             className={`
             text-black  bg-white w-32 md:w-48 md:h-12 md:text-lg p-2 text-xs whitespace-nowrap rounded-sm hover:scale-90 duration-300}`}
@@ -52,7 +51,8 @@ export const Home = () => {
             Products
           </button>
           <button
-            className={`text-black  bg-white w-32 md:w-48 md:h-12 md:text-lg p-2 text-xs whitespace-nowrap rounded-sm hover:scale-90 duration-300}`}
+            className={`
+            text-black  bg-white w-32 md:w-48 md:h-12 md:text-lg p-2 text-xs whitespace-nowrap rounded-sm hover:scale-90 duration-300}`}
             onClick={() => navigate("/supplements")}
           >
             Secondary
